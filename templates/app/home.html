@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blogging Site</title>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="{% url 'create_article' %}">Create Article</a></li>
+        </ul>
+    </nav>
+    <h1>Articles</h1>
+    <ul>
+    {% for article in articles %}
+        <li>{{ article.tittle }} with {{ article.word_count }} words.</li>
+    {% endfor %}
+    </ul>
+</body>
+</html>
