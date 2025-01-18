@@ -1,7 +1,9 @@
 from django.urls import path
-from app.views import home, create_article
+from app.views import ArticleView, CreateArticleForm, DeleteArticle, UpdateArticle
 
 urlpatterns = [
-    path("",home,name="home"),
-    path("article/create/", create_article,name="create_article")
+    path("",ArticleView.as_view(),name="home"),
+    path("create/", CreateArticleForm.as_view(),name="create_article"),
+    path("<int:pk>/update", UpdateArticle.as_view(), name="update_article"),
+    path("<int:pk>/delete", DeleteArticle.as_view(), name="delete_article"),
 ]

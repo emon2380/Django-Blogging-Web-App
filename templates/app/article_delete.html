@@ -3,17 +3,17 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Create Article</title>
+        <title>Delete Article</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="">
     </head>
     <body>
-        <h1>Create Article</h1>
+        <h1>Delete Article</h1>
         <form method="POST">
             {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit">Save</button>
+            <p>Are you sure you want to delete this?</p>
+            <button type="submit">Delete</button>
         </form>
         <a href="{% url 'home' %}">Back to List</a>
     </body>

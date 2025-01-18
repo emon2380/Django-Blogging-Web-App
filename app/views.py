@@ -1,27 +1,25 @@
-
-from django.shortcuts import render, redirect
 from app.models import Article
-from app.forms import CreateArticleForm
+from django.views.generic import CreateView,ListView,DeleteView,UpdateView
+from django.urls import reverse_lazy
 
-def home(request):
-    articles = Article.objects.all()
-    return render(request, 'app/home.html', {"articles": articles})
+class ArticleView(ListView):
+    template_name = "app/home.html"
+    context_object_name = "articles"
+    model = Article
 
-def create_article(request):
-    if request.method == "POST":
-        form = CreateArticleForm(request.POST)
-        if form.is_valid():
-            form_data= form.cleaned_data
-            new_article = Article(
-                tittle=form_data["tittle"],
-                content=form_data["content"],
-                status=form_data["status"],
-                word_count=form_data["word_count"],
-                twitter_post=form_data["twitter_post"]
-            )
-            new_article.save()
-            return redirect("home")
-            
-    else:
-        form = CreateArticleForm()
-    return render(request, "app/article_create.html", {"form":form})
+class CreateArticleForm(CreateView):
+    model = Article
+    fields = ["tittle", "content", "status"]
+    template_name = "app/article_create.html"
+    success_url = reverse_lazy("home")
+
+class DeleteArticle(DeleteView):
+    model = Article
+    template_name = "app/article_delete.html"
+    success_url = reverse_lazy("home")
+
+class UpdateArticle(UpdateView):
+    model = Article
+    fields = ["tittle", "content", "status"]
+    template_name = "app/article_update.html"
+    success_url = reverse_lazy("home")
