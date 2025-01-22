@@ -1,20 +1,11 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Update Article</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
-    </head>
-    <body>
-        <h1>Update Article</h1>
-        <form method="POST">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit">Update</button>
-        </form>
-        <a href="{% url 'home' %}">Back to List</a>
-    </body>
-</html>
+{% extends 'app/base.html' %}
+{% block content %}
+<h1>Update Article</h1>
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Update</button>
+    <a href="{% url 'home' %}">Back to List</a>
+    <a href="{% url 'delete_article' article.id %}">Delete</a>
+</form>
+{% endblock content %}
